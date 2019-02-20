@@ -1,15 +1,30 @@
 <?php
-$servername = "localhost";
-$datenbankname = "Online Wallet";
-$username = "username";
-$password = "password";
+require 'mysqlconnector.php';
 
-// Create connection
-$conn = new mysqli($servername,$datenbankname, $username, $password);
 
-// Check connection
-if ($conn->connect_error) {
-   die("Connection failed: " . $conn->connect_error);
+$connector = new MysqlConnector('localhost', 'Online Wallet', 'user');
+
+if(empty($_GET['mode'])){
+  $mode = '';
+}else{
+  $mode = $_GET['mode'];
 }
-echo "Connected successfully";
+
+if($mode == 'add'){
+    $user_id = $_POST['user_id']; // Diese Zeile ändern anstatt $user_id = $SESSION['user_id]
+    $wasser = $_POST['input_water'];
+    $type = $_POST['type'];
+    $connector->insert_water_consum($wasser, $type, $user_id);
+}
 ?>
+
+<html>
+<body>
+  <form action="insert_water.php?mode=add" method="POST">
+    User<input name="user_id"></br>
+    Wasser<input name="input_water"></br>
+    Type<input name="type"></br>
+    <input type="submit"></br>
+  </form>
+</body>
+</html>
