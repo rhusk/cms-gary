@@ -26,9 +26,9 @@ CREATE TABLE `profile` (
   `bankart` varchar(255) NOT NULL,
   `iban` varchar(255) NOT NULL,
   `kontonummer` varchar(255) NOT NULL,
-  `vorname` varchar(255) NOT NULL,
-  `nachname` varchar(255) NOT NULL,
-  `email` varchar(255) NOT NULL,
+  `vornamep` varchar(255) NOT NULL,
+  `nachnamep` varchar(255) NOT NULL,
+  `emailp` varchar(255) NOT NULL,
   `gueltig` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
