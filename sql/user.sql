@@ -13,8 +13,8 @@ SET time_zone = "+00:00";
 --
 -- Datenbank: `Online Wallet`
 --
-CREATE DATABASE IF NOT EXISTS `Online Wallet` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
-USE `Online Wallet`;
+CREATE DATABASE IF NOT EXISTS `online_wallet` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci;
+USE `online_wallet`;
 
 -- --------------------------------------------------------
 

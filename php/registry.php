@@ -2,7 +2,7 @@
 require 'mysqlconnector.php';
 
 
-$connector = new MysqlConnector('localhost', 'Online Wallet', 'user');
+$connector = new MysqlConnector('localhost', 'test', 'test');
 
 if(empty($_GET['mode'])){
   $mode = '';
