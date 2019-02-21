@@ -27,13 +27,13 @@ class MysqlConnector {
   }
 
 
-/* Schreiben der User-Daten in die Datenbank */
-
-public function insert_user($name, $email, $password, $username){
-  // INSERT INTO user ( email, password, name, username  ) VALUES ('niclas@sae.de', 'passwort', 'niclas', 'niclas92');
+  /* Schreiben der User-Daten in die Datenbank */
+  public function insert_user($vorname, $nachname, $password, $email){
+//public function insert_user($name, $email, $password, $username){
+  // INSERT INTO user ( email, password, name, username  ) VALUES ('niclas@sae.de', 'password', 'niclas', 'niclas92');
   $encrytedpassword = password_hash($password, PASSWORD_DEFAULT);
-  $sqlinsert = "INSERT INTO user ( email, passwort, name, username ) " // bauen das SQL, das wir nutzen, um den
-  . " VALUES ('".$email."','$encrytedpassword', '$name', '$username');";         //Benutzer in die Datenbank zu schreiben als String
+  $sqlinsert = "INSERT INTO user ( vorname, nachname, password, email ) " // bauen das SQL, das wir nutzen, um den
+  . " VALUES ('$vorname','$nachname', '$encrytedpassword', '".$email."');";//Benutzer in die Datenbank zu schreiben als String
   if ($this->connection->query($sqlinsert) === TRUE) { //query führt das SQL auf der Datenbank aus
       //echo "New record created successfully";
       error_log("User created");
@@ -61,7 +61,7 @@ public function insert_user($name, $email, $password, $username){
     }
     return $userexists;
 }
-/* Überprüfung, ob das Passwort zur eingegebenen E-Mail passt */
+/* Überprüfung, ob das password zur eingegebenen E-Mail passt */
 
 public function checkpassword($email, $password){
   $sql = "SELECT * FROM user WHERE email = '$email';";
@@ -75,11 +75,11 @@ public function checkpassword($email, $password){
 
  /* Updaten der Userdaten für Größe und Gewicht in die Datenbank */
 
- public function update_user($email, $height, $weight){
+ //public function update_user($email, $height, $weight){
   //UPDATE sodastream.user SET height = 179, weight = 74 where Name = 'niclas';
-  $sqlupdate = "UPDATE sodastream.user SET height = " . $height // bauen das SQL, das wir nutzen, um den
-  . ", weight = ".$weight." WHERE email =". $email;//Benutzer in die Datenbank zu schreiben als String
-  if ($this->connection->query($sqlinsert) === TRUE) { //query führt das SQL auf der Datenbank aus
+  //$sqlupdate = "UPDATE sodastream.user SET height = " . $height // bauen das SQL, das wir nutzen, um den
+  //. ", weight = ".$weight." WHERE email =". $email;//Benutzer in die Datenbank zu schreiben als String
+  //if ($this->connection->query($sqlinsert) === TRUE) { //query führt das SQL auf der Datenbank aus
 
 
     /*
@@ -88,15 +88,15 @@ public function checkpassword($email, $password){
 – Siehe unten: Ist der user kleiner als 180cm und wiegt weniger als 75kg soll im sql die Zeile daily_water aktualisiert und der entsprechende Wert eingetrgen werden.
 */
 
-    if ($this->$height < 180 && $this->$weight < 75){
-      $sqlupdate = "UPDATE sodastream.user SET daily_water = 2 WHERE id = ". $id;
-    }
+    //if ($this->$height < 180 && $this->$weight < 75){
+      //$sqlupdate = "UPDATE sodastream.user SET daily_water = 2 WHERE id = ". $id;
+    //}
 
-      echo "New record created successfully";
-  } else {
-      echo "Error: " . $sqlinsert . "<br>" . $this->connection->error;
-  }
-}
+      //echo "New record created successfully";
+  //} else {
+    //  echo "Error: " . $sqlinsert . "<br>" . $this->connection->error;
+  //}
+//}
 
 
 
@@ -118,33 +118,32 @@ public function required_water ($id, $height, $weight){
 // ALLE Wasserwerte von einem Benutzer pro Tag
   /* Schreiben der Daten in die Datenbank */
 
-  public function insert_water_consum($input, $type, $user_id){
+  //public function insert_water_consum($input, $type, $user_id){
     //INSERT INTO sodastream (id, created_at, input_water, type, user_id) VALUES ('1', '2018-12-03', '5', 'Glass', '1');
-    $created_at = date("Y-m-d H:i:s");
-    $sqlinsert = "INSERT INTO sodastream.water_consume (created_at, input_water, type, user_id) " // bauen das SQL, das wir nutzen, um den
-    . " VALUES ('".$created_at."','".$input."','".$type."','" .$user_id. "');";//Benutzer in die Datenbank zu schreiben als String
-    if ($this->connection->query($sqlinsert) === TRUE) { //query führt das SQL auf der Datenbank aus$charactersfromdb
-        echo "New record created successfully";
-    } else {
-        echo "Error: " . $sqlinsert . "<br>" . $this->connection->error;
-    }
-}
+    //$created_at = date("Y-m-d H:i:s");
+    //$sqlinsert = "INSERT INTO sodastream.water_consume (created_at, input_water, type, user_id) " // bauen das SQL, das wir nutzen, um den
+    //. " VALUES ('".$created_at."','".$input."','".$type."','" .$user_id. "');";//Benutzer in die Datenbank zu schreiben als String
+    //if ($this->connection->query($sqlinsert) === TRUE) { //query führt das SQL auf der Datenbank aus$charactersfromdb
+      //  echo "New record created successfully";
+    //} else {
+      //  echo "Error: " . $sqlinsert . "<br>" . $this->connection->error;
+    //}
+//}
 
   /* Gibt die Wasserwerte des jeweiligen Nutzers aus  */
 
-  public function get_water_for_user_and_day($user, $created_at){
-    $water_for_user = array();
-    $sqlselect = "SELECT * FROM sodastream.user WHERE user_id = " .$user . " AND created_at = " . $created_at; // bauen das SQL, das wir nutzen, um den
-    $watersfromdb = $this->connection->query($sqlselect); //query führt das SQL auf der Datenbank aus
+  //public function get_water_for_user_and_day($user, $created_at){
+  //  $water_for_user = array();
+  //  $sqlselect = "SELECT * FROM sodastream.user WHERE user_id = " .$user . " AND created_at = " . $created_at; // bauen das SQL, das wir nutzen, um den
+  //  $watersfromdb = $this->connection->query($sqlselect); //query führt das SQL auf der Datenbank aus
     //TODO pro datansatz erzeuge ich ein Object von Typ character
     //iterate durch alle Sätze
-    foreach($watersfromdb AS $waterfromdb) {
+  //  foreach($watersfromdb AS $waterfromdb) {
       //$created_at, $input_water, $user_id, $type
       //mapping der Datenbank Daten als Php Objekte
-      $water = new water_consume($waterfromdb[i]['created_at'], $waterfromdb[i]['input_water'], $waterfromdb[i]['user_id'], $waterfromdb[i]['type'] );
-      array_push($water_for_user, $water);
-    }
-    return $water_for_user;
-}
+    //  $water = new water_consume($waterfromdb[i]['created_at'], $waterfromdb[i]['input_water'], $waterfromdb[i]['user_id'], $waterfromdb[i]['type'] );
+    //  array_push($water_for_user, $water);
+  //  }
+  //  return $water_for_user;
 }
 ?>

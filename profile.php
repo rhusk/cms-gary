@@ -1,3 +1,9 @@
+<?php
+
+
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -80,23 +86,36 @@
                 <option value="online">Online Bankkonto</option>
                 <option value="other">Andere</option>
               </select>
-              <br><br>
+              <br>
               <label class="form_konto" for="">IBAN </label>
+              <br>
               <input type="text" name="iban" value="" style="width:150px;">
+              <br>
               <label class="form_konto" for="">Kontonummer</label>
+              <br>
               <input type="number" name="kontonummer" value="" style="width:150px;">
-              <br><br>
+              <br>
               <label class="form_konto" for="">Vorname </label>
+              <br>
               <input type="text" name="vorname" value="" style="width:150px;">
+              <br>
               <label class="form_konto" for="">Nachname</label>
+              <br>
               <input type="text" name="nachname" value="" style="width:150px;">
-              <br><br>
+              <br>
               <label class="form_konto" for="">Email</label>
+              <br>
               <input type="email" name="email" value="" style="width:150px;">
+              <br>
               <label class="form_konto" for="">Gültig Bis</label>
+              <br>
               <input type="date" name="gueltig" value="" style="width:150px;">
               <br><br>
               <input type="submit" value="Save">
+            </form>
+            <br>
+            <form action="login.php" method="post">
+              <input type="submit" value="Logout" />
             </form>
           </div>
         </div>

@@ -55,9 +55,8 @@
                       <li class="active">
                         <a href="index.html">Home</a>
                       </li>
-                      <li><a href="login.html">Login</a></li>
-                      <li><a href="registry.html">Registry</a></li>
-                      <li><a href="profile.html">Profile</a></li>
+                      <li><a href="login.php">Login</a></li>
+                      <li><a href="registry.php">Registry</a></li>
                     </ul>
                   </div>
                 </nav>

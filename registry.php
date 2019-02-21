@@ -1,33 +1,41 @@
 <?php
 require('php/mysqlconnector.php');
 session_start();
-$mysqlconnector = new MysqlConnector("localhost", "test", "test");
+$mysqlconnector = new MysqlConnector("localhost", "root", "root");
 $error = false;
 error_log("Im registry");
-error_log("POST SUBMIT : " . $_POST['submit']);
 if(!empty($_POST['submit'])) // Überprüfung, ob Button geklickt wurde
 {
     //get the values from the POST REQUEST
-    $name = trim($_POST['nachname']); $username = trim($_POST['vorname']); $email = $_POST['email']; $password = $_POST['passwort'];
+    $vorname = trim($_POST['vorname']); $nachname = trim($_POST['nachname']); $password = $_POST['password']; $email = $_POST['email'];
     error_log("Submitted clicked");
     // set the error messages empty
-    $name_error = ""; $username_error = ""; $email_error = ""; $password_error = "";
+    $vorname_error = ""; $nachname_error = ""; $password_error = ""; $email_error = "";
 
     //if submitted, then validate
     error_log("Validating name");
-    if(empty($name))
+    if(empty($vorname))
     {
         $error=true;
-        $name_error=' * Bitte geben Sie Ihren Namen ein';
-    }
-        error_log("Validating username");
-        if(empty($username))
-        {
-                $error=true;
-        $username_error=' * Bitte geben Sie einen Benutzernamen ein.';
+        $vorname_error=' * Bitte geben Sie Ihren voramen ein';
         error_log("Vorname scheisse");
     }
+        error_log("Validating vorname");
+        if(empty($nachname))
+        {
+        $error=true;
+        $nachname_error=' * Bitte geben Sie einen nachnamen ein.';
+        error_log("nachname scheisse");
+    }
     error_log("Validating email on empty....");
+
+    if(empty($password))
+    {
+        $error=true;
+        $password_error=' * Bitte geben Sie ein password ein.';
+        error_log("Password scheisse ....");
+
+    }
 
     if(empty($email))
     {
@@ -52,26 +60,18 @@ if(!empty($_POST['submit'])) // Überprüfung, ob Button geklickt wurde
     }
     error_log("Validating password....");
 
-    if(empty($password))
-    {
-        $error=true;
-        $password_error=' * Bitte geben Sie ein Passwort ein.';
-        error_log("Password scheisse ....");
-
-    }
-
     if(false === $error)
         {
-                //Validation Success!
-                //Do form processing like email, database etc here
+        //Validation Success!
+        //Do form processing like email, database etc here
         error_log("Inserting user...");
-        $mysqlconnector->insert_user($name, $email, $password, $username, 0, 0);
+        $mysqlconnector->insert_user($vorname, $nachname, $password, $email, 0, 0);
         //echo 'User inserted';
         error_log("Schreiben des Users in die Session...");
         $_SESSION['loggedin'] = $email;
 
         error_log('Nun ist der User in der Session in loggedin : ' . $_SESSION['loggedin']);
-        header('Location: profile.html');
+        header('Location: profile.php');
         }
 }
 ?>
@@ -120,7 +120,7 @@ if(!empty($_POST['submit'])) // Überprüfung, ob Button geklickt wurde
           <div class="py-1">
             <div class="row align-items-center">
               <div class="col-2">
-                <h2 class="mb-0 site-logo"><a href="index.html">Rhusk.Wallet</a></h2>
+                <h2 class="mb-0 site-logo"><a href="index.php">Rhusk.Wallet</a></h2>
               </div>
               <div class="col-10">
                 <nav class="site-navigation text-right" role="navigation">
@@ -132,9 +132,8 @@ if(!empty($_POST['submit'])) // Überprüfung, ob Button geklickt wurde
                       <li class="active">
                         <a href="index.html">Home</a>
                       </li>
-                      <li><a href="login.html">Login</a></li>
-                      <li><a href="registry.html">Registry</a></li>
-                      <li><a href="profile.html">Profile</a></li>
+                      <li><a href="login.php">Login</a></li>
+                      <li><a href="registry.php">Registry</a></li>
                     </ul>
                   </div>
                 </nav>
@@ -153,16 +152,16 @@ if(!empty($_POST['submit'])) // Überprüfung, ob Button geklickt wurde
             <h1 class="mb-4 mb_4">Registry</h1>
             <form action="registry.php" method="POST">
               <label class="form_regisry" for="">Vorname</label><br>
-              <input type="text" name="vorname" value="rhusk">
+              <input type="text" name="vorname" value="">
               <br>
               <label class="form_regisry" for="">Nachname</label><br>
-              <input type="text" name="nachname" value=".wallet">
+              <input type="text" name="nachname" value="">
               <br>
-              <label class="form_regisry" for="">Passwort</label><br>
-              <input type="password" name="passwort" value="asdf1234">
+              <label class="form_regisry" for="">Password</label><br>
+              <input type="password" name="password" value="">
               <br>
               <label class="form_regisry" for="">Email</label><br>
-              <input type="email" name="email" value="rhusk@wallet.de">
+              <input type="email" name="email" value="">
               <br><br>
               <input type="submit" name="submit" value="Submit">
             </form>

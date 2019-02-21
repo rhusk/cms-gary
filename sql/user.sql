@@ -40,18 +40,18 @@ CREATE TABLE `profile` (
 
 CREATE TABLE `user` (
   `id` int(11) NOT NULL,
-  `vorname` varchar(200) NOT NULL,
-  `nachname` varchar(200) NOT NULL,
-  `passwort` varchar(200) NOT NULL,
-  `email` varchar(250) NOT NULL
+  `vorname` varchar(255) NOT NULL,
+  `nachname` varchar(255) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  `email` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Daten für Tabelle `user`
 --
 
-INSERT INTO `user` (`id`, `vorname`, `nachname`, `passwort`, `email`) VALUES
-(1, '1', 'gary', '1234asdf', '');
+INSERT INTO `user` (`id`, `vorname`, `nachname`, `password`, `email`) VALUES
+(1, 'Gary', 'K', '1234asdf', 'gary@rhusk.de');
 
 --
 -- Indizes der exportierten Tabellen
