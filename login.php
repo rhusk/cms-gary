@@ -1,4 +1,28 @@
+<?php
 
+// Initialisierung der Session.
+// Wenn Sie session_name("irgendwas") verwenden, vergessen Sie es
+// jetzt nicht!
+session_start();
+
+// Löschen aller Session-Variablen.
+$_SESSION = array();
+
+// Falls die Session gelöscht werden soll, löschen Sie auch das
+// Session-Cookie.
+// Achtung: Damit wird die Session gelöscht, nicht nur die Session-Daten!
+if (ini_get("session.use_cookies")) {
+    $params = session_get_cookie_params();
+    setcookie(session_name(), '', time() - 42000, $params["path"],
+        $params["domain"], $params["secure"], $params["httponly"]
+    );
+}
+
+// Zum Schluß, löschen der Session.
+session_destroy();
+  error_log('Nun ist der User nicht mehr in der Session');
+
+ ?>
 
 
 <!DOCTYPE html>
@@ -75,10 +99,10 @@
             <h1 class="mb-4 mb_4">Login</h1>
             <form action="/action_page.php">
               <label class="form_regisry" for="">Email</label><br>
-              <input type="email" name="email" value="rhusk@wallet.de">
+              <input type="email" name="email" value="">
               <br>
               <label class="form_regisry" for="">Passwort</label><br>
-              <input type="password" name="passwort" value="asdf1234">
+              <input type="password" name="passwort" value="">
               <br><br>
               <input type="submit" value="Submit">
             </form>

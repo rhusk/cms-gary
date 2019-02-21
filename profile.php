@@ -1,9 +1,3 @@
-<?php
-
-
-
-?>
-
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -115,7 +109,7 @@
             </form>
             <br>
             <form action="login.php" method="post">
-              <input type="submit" value="Logout" />
+              <input name="logout" type="submit" value="Logout" />
             </form>
           </div>
         </div>

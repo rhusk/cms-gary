@@ -74,6 +74,7 @@ if(!empty($_POST['submit'])) // Überprüfung, ob Button geklickt wurde
         header('Location: profile.php');
         }
 }
+
 ?>
 
 
